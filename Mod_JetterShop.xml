@@ -1,0 +1,452 @@
+<?xml version="1.0" ?>
+<enemy>
+    <behaviour>
+        <root x="110" y="40">
+            <normal>
+                <orblock>
+                    <string id="Comment">Get pills when a drill is exposed</string>
+                    <normal>
+                        <action id="setBool">
+                            <string id="id">buyPills</string>
+                            <string id="value" values="flagtoggle">yes</string>
+                        </action>
+                        <condition id="isUpgradeEnabled">
+                            <string id="condition" values="yesno">no</string>
+                            <string id="upgrade name">TutorialListen</string>
+                            <normal>
+                                <action id="enableUpgrade">
+                                    <string id="condition" values="yesno">yes</string>
+                                    <string id="upgrade name">TutorialListen</string>
+                                </action>
+                            </normal>
+                        </condition>
+                    </normal>
+                    <or>
+                        <condition id="isInNamedArea">
+                            <string id="area name">AREAHOME</string>
+                            <string id="team" values="ownenemy">ENEMY_TEAM</string>
+                            <string id="who" values="targetself">self</string>
+                        </condition>
+                        <condition id="receivedPing">
+                            <string id="ping" values="ping">BASE_UNDER_ATTACK</string>
+                        </condition>
+                        <condition id="isUpgradeEnabled">
+                            <string id="condition" values="yesno">yes</string>
+                            <string id="upgrade name">TutorialListen</string>
+                        </condition>
+                    </or>
+                </orblock>
+                <condition id="isInNamedArea">
+                    <string id="area name">HEALAREA</string>
+                    <string id="team" values="ownenemy">OWN_TEAM</string>
+                    <string id="who" values="targetself">self</string>
+                    <string id="Comment">Am I in shop?</string>
+                    <normal>
+                        <condition id="isUpgradeEnabled">
+                            <string id="condition" values="yesno">no</string>
+                            <string id="upgrade name">Mine</string>
+                            <normal>
+                                <condition id="canPayUpgrade">
+                                    <string id="upgrade name">Mine</string>
+                                    <normal>
+                                        <action id="buyUpgrade">
+                                            <string id="upgrade name">Mine</string>
+                                        </action>
+                                    </normal>
+                                </condition>
+                            </normal>
+                            <else>
+                                <condition id="isUpgradeEnabled">
+                                    <string id="condition" values="yesno">no</string>
+                                    <string id="upgrade name">TimeBubble</string>
+                                    <normal>
+                                        <condition id="canPayUpgrade">
+                                            <string id="upgrade name">TimeBubble</string>
+                                            <normal>
+                                                <action id="buyUpgrade">
+                                                    <string id="upgrade name">TimeBubble</string>
+                                                </action>
+                                            </normal>
+                                        </condition>
+                                    </normal>
+                                    <else>
+                                        <condition id="isUpgradeEnabled">
+                                            <string id="condition" values="yesno">no</string>
+                                            <string id="upgrade name">healthRegen1</string>
+                                            <normal>
+                                                <condition id="canPayUpgrade">
+                                                    <string id="upgrade name">healthRegen1</string>
+                                                    <normal>
+                                                        <action id="buyUpgrade">
+                                                            <string id="upgrade name">healthRegen1</string>
+                                                        </action>
+                                                    </normal>
+                                                </condition>
+                                            </normal>
+                                            <else>
+                                                <condition id="isUpgradeEnabled">
+                                                    <string id="condition" values="yesno">no</string>
+                                                    <string id="upgrade name">JetterMineDamage1</string>
+                                                    <normal>
+                                                        <condition id="canPayUpgrade">
+                                                            <string id="upgrade name">JetterMineDamage1</string>
+                                                            <normal>
+                                                                <action id="buyUpgrade">
+                                                                    <string id="upgrade name">JetterMineDamage1</string>
+                                                                </action>
+                                                            </normal>
+                                                        </condition>
+                                                    </normal>
+                                                    <else>
+                                                        <condition id="isUpgradeEnabled">
+                                                            <string id="condition" values="yesno">no</string>
+                                                            <string id="upgrade name">JetterTimebubbleSpeedup</string>
+                                                            <normal>
+                                                                <condition id="canPayUpgrade">
+                                                                    <string id="upgrade name">JetterTimebubbleSpeedup</string>
+                                                                    <normal>
+                                                                        <action id="buyUpgrade">
+                                                                            <string id="upgrade name">JetterTimebubbleSpeedup</string>
+                                                                        </action>
+                                                                    </normal>
+                                                                </condition>
+                                                            </normal>
+                                                            <else>
+                                                                <condition id="getBoolEquals">
+                                                                    <string id="id">buyPills</string>
+                                                                    <string id="value" values="yesno">yes</string>
+                                                                    <normal>
+                                                                        <condition id="isUpgradeEnabled">
+                                                                            <string id="condition" values="yesno">no</string>
+                                                                            <string id="upgrade name">addHealth1</string>
+                                                                            <normal>
+                                                                                <condition id="canPayUpgrade">
+                                                                                    <string id="upgrade name">addHealth1</string>
+                                                                                    <normal>
+                                                                                        <action id="buyUpgrade">
+                                                                                            <string id="upgrade name">addHealth1</string>
+                                                                                        </action>
+                                                                                    </normal>
+                                                                                </condition>
+                                                                            </normal>
+                                                                            <else>
+                                                                                <condition id="isUpgradeEnabled">
+                                                                                    <string id="condition" values="yesno">no</string>
+                                                                                    <string id="upgrade name">addHealth2</string>
+                                                                                    <normal>
+                                                                                        <condition id="canPayUpgrade">
+                                                                                            <string id="upgrade name">addHealth2</string>
+                                                                                            <normal>
+                                                                                                <action id="buyUpgrade">
+                                                                                                    <string id="upgrade name">addHealth2</string>
+                                                                                                </action>
+                                                                                            </normal>
+                                                                                        </condition>
+                                                                                    </normal>
+                                                                                    <else>
+                                                                                        <condition id="isUpgradeEnabled">
+                                                                                            <string id="condition" values="yesno">no</string>
+                                                                                            <string id="upgrade name">addHealth3</string>
+                                                                                            <normal>
+                                                                                                <condition id="canPayUpgrade">
+                                                                                                    <string id="upgrade name">addHealth3</string>
+                                                                                                    <normal>
+                                                                                                        <action id="buyUpgrade">
+                                                                                                            <string id="upgrade name">addHealth3</string>
+                                                                                                        </action>
+                                                                                                    </normal>
+                                                                                                </condition>
+                                                                                            </normal>
+                                                                                        </condition>
+                                                                                    </else>
+                                                                                </condition>
+                                                                            </else>
+                                                                        </condition>
+                                                                    </normal>
+                                                                </condition>
+                                                                <condition id="isUpgradeEnabled">
+                                                                    <string id="condition" values="yesno">no</string>
+                                                                    <string id="upgrade name">JetterSpeed</string>
+                                                                    <normal>
+                                                                        <condition id="canPayUpgrade">
+                                                                            <string id="upgrade name">JetterSpeed</string>
+                                                                            <normal>
+                                                                                <action id="buyUpgrade">
+                                                                                    <string id="upgrade name">JetterSpeed</string>
+                                                                                </action>
+                                                                            </normal>
+                                                                        </condition>
+                                                                    </normal>
+                                                                    <else>
+                                                                        <condition id="isUpgradeEnabled">
+                                                                            <string id="condition" values="yesno">no</string>
+                                                                            <string id="upgrade name">JetterMineDamage2</string>
+                                                                            <normal>
+                                                                                <condition id="canPayUpgrade">
+                                                                                    <string id="upgrade name">JetterMineDamage2</string>
+                                                                                    <normal>
+                                                                                        <action id="buyUpgrade">
+                                                                                            <string id="upgrade name">JetterMineDamage2</string>
+                                                                                        </action>
+                                                                                    </normal>
+                                                                                </condition>
+                                                                            </normal>
+                                                                            <else>
+                                                                                <condition id="isUpgradeEnabled">
+                                                                                    <string id="condition" values="yesno">no</string>
+                                                                                    <string id="upgrade name">JetterMineDamage3</string>
+                                                                                    <normal>
+                                                                                        <condition id="canPayUpgrade">
+                                                                                            <string id="upgrade name">JetterMineDamage3</string>
+                                                                                            <normal>
+                                                                                                <action id="buyUpgrade">
+                                                                                                    <string id="upgrade name">JetterMineDamage3</string>
+                                                                                                </action>
+                                                                                            </normal>
+                                                                                        </condition>
+                                                                                    </normal>
+                                                                                    <else>
+                                                                                        <condition id="isUpgradeEnabled">
+                                                                                            <string id="condition" values="yesno">no</string>
+                                                                                            <string id="upgrade name">JetterTimebubbleHeal1</string>
+                                                                                            <normal>
+                                                                                                <condition id="canPayUpgrade">
+                                                                                                    <string id="upgrade name">JetterTimebubbleHeal1</string>
+                                                                                                    <normal>
+                                                                                                        <action id="buyUpgrade">
+                                                                                                            <string id="upgrade name">JetterTimebubbleHeal1</string>
+                                                                                                        </action>
+                                                                                                    </normal>
+                                                                                                </condition>
+                                                                                            </normal>
+                                                                                            <else>
+                                                                                                <condition id="isUpgradeEnabled">
+                                                                                                    <string id="condition" values="yesno">no</string>
+                                                                                                    <string id="upgrade name">JetterTimebubbleHeal2</string>
+                                                                                                    <normal>
+                                                                                                        <condition id="canPayUpgrade">
+                                                                                                            <string id="upgrade name">JetterTimebubbleHeal2</string>
+                                                                                                            <normal>
+                                                                                                                <action id="buyUpgrade">
+                                                                                                                    <string id="upgrade name">JetterTimebubbleHeal2</string>
+                                                                                                                </action>
+                                                                                                            </normal>
+                                                                                                        </condition>
+                                                                                                    </normal>
+                                                                                                    <else>
+                                                                                                        <condition id="isUpgradeEnabled">
+                                                                                                            <string id="condition" values="yesno">no</string>
+                                                                                                            <string id="upgrade name">JetterMineDamage4</string>
+                                                                                                            <normal>
+                                                                                                                <condition id="canPayUpgrade">
+                                                                                                                    <string id="upgrade name">JetterMineDamage4</string>
+                                                                                                                    <normal>
+                                                                                                                        <action id="buyUpgrade">
+                                                                                                                            <string id="upgrade name">JetterMineDamage4</string>
+                                                                                                                        </action>
+                                                                                                                    </normal>
+                                                                                                                </condition>
+                                                                                                            </normal>
+                                                                                                            <else>
+                                                                                                                <condition id="isUpgradeEnabled">
+                                                                                                                    <string id="condition" values="yesno">no</string>
+                                                                                                                    <string id="upgrade name">JetterTimebubbleHeal4</string>
+                                                                                                                    <normal>
+                                                                                                                        <condition id="canPayUpgrade">
+                                                                                                                            <string id="upgrade name">JetterTimebubbleHeal4</string>
+                                                                                                                            <normal>
+                                                                                                                                <action id="buyUpgrade">
+                                                                                                                                    <string id="upgrade name">JetterTimebubbleHeal4</string>
+                                                                                                                                </action>
+                                                                                                                            </normal>
+                                                                                                                        </condition>
+                                                                                                                    </normal>
+                                                                                                                    <else>
+                                                                                                                        <condition id="isUpgradeEnabled">
+                                                                                                                            <string id="condition" values="yesno">no</string>
+                                                                                                                            <string id="upgrade name">healthRegen2</string>
+                                                                                                                            <normal>
+                                                                                                                                <condition id="canPayUpgrade">
+                                                                                                                                    <string id="upgrade name">healthRegen2</string>
+                                                                                                                                    <normal>
+                                                                                                                                        <action id="buyUpgrade">
+                                                                                                                                            <string id="upgrade name">healthRegen2</string>
+                                                                                                                                        </action>
+                                                                                                                                    </normal>
+                                                                                                                                </condition>
+                                                                                                                            </normal>
+                                                                                                                            <else>
+                                                                                                                                <condition id="isUpgradeEnabled">
+                                                                                                                                    <string id="condition" values="yesno">no</string>
+                                                                                                                                    <string id="upgrade name">JetterMineLongevity</string>
+                                                                                                                                    <normal>
+                                                                                                                                        <condition id="canPayUpgrade">
+                                                                                                                                            <string id="upgrade name">JetterMineLongevity</string>
+                                                                                                                                            <normal>
+                                                                                                                                                <action id="buyUpgrade">
+                                                                                                                                                    <string id="upgrade name">JetterMineLongevity</string>
+                                                                                                                                                </action>
+                                                                                                                                            </normal>
+                                                                                                                                        </condition>
+                                                                                                                                    </normal>
+                                                                                                                                    <else>
+                                                                                                                                        <condition id="isUpgradeEnabled">
+                                                                                                                                            <string id="condition" values="yesno">no</string>
+                                                                                                                                            <string id="upgrade name">JetterMineLongevity2</string>
+                                                                                                                                            <normal>
+                                                                                                                                                <condition id="canPayUpgrade">
+                                                                                                                                                    <string id="upgrade name">JetterMineLongevity2</string>
+                                                                                                                                                    <normal>
+                                                                                                                                                        <action id="buyUpgrade">
+                                                                                                                                                            <string id="upgrade name">JetterMineLongevity2</string>
+                                                                                                                                                        </action>
+                                                                                                                                                    </normal>
+                                                                                                                                                </condition>
+                                                                                                                                            </normal>
+                                                                                                                                            <else>
+                                                                                                                                                <condition id="isUpgradeEnabled">
+                                                                                                                                                    <string id="condition" values="yesno">no</string>
+                                                                                                                                                    <string id="upgrade name">JetterShotMoreStages3</string>
+                                                                                                                                                    <normal>
+                                                                                                                                                        <condition id="canPayUpgrade">
+                                                                                                                                                            <string id="upgrade name">JetterShotMoreStages3</string>
+                                                                                                                                                            <normal>
+                                                                                                                                                                <action id="buyUpgrade">
+                                                                                                                                                                    <string id="upgrade name">JetterShotMoreStages3</string>
+                                                                                                                                                                </action>
+                                                                                                                                                            </normal>
+                                                                                                                                                        </condition>
+                                                                                                                                                    </normal>
+                                                                                                                                                    <else>
+                                                                                                                                                        <condition id="isUpgradeEnabled">
+                                                                                                                                                            <string id="condition" values="yesno">no</string>
+                                                                                                                                                            <string id="upgrade name">JetterSummonerShotRange</string>
+                                                                                                                                                            <normal>
+                                                                                                                                                                <condition id="canPayUpgrade">
+                                                                                                                                                                    <string id="upgrade name">JetterSummonerShotRange</string>
+                                                                                                                                                                    <normal>
+                                                                                                                                                                        <action id="buyUpgrade">
+                                                                                                                                                                            <string id="upgrade name">JetterSummonerShotRange</string>
+                                                                                                                                                                        </action>
+                                                                                                                                                                    </normal>
+                                                                                                                                                                </condition>
+                                                                                                                                                            </normal>
+                                                                                                                                                            <else>
+                                                                                                                                                                <condition id="isUpgradeEnabled">
+                                                                                                                                                                    <string id="condition" values="yesno">no</string>
+                                                                                                                                                                    <string id="upgrade name">JetterShotAttackspeed</string>
+                                                                                                                                                                    <normal>
+                                                                                                                                                                        <condition id="canPayUpgrade">
+                                                                                                                                                                            <string id="upgrade name">JetterShotAttackspeed</string>
+                                                                                                                                                                            <normal>
+                                                                                                                                                                                <action id="buyUpgrade">
+                                                                                                                                                                                    <string id="upgrade name">JetterShotAttackspeed</string>
+                                                                                                                                                                                </action>
+                                                                                                                                                                            </normal>
+                                                                                                                                                                        </condition>
+                                                                                                                                                                    </normal>
+                                                                                                                                                                    <else>
+                                                                                                                                                                        <condition id="isUpgradeEnabled">
+                                                                                                                                                                            <string id="condition" values="yesno">no</string>
+                                                                                                                                                                            <string id="upgrade name">JetterShotAttackspeed2</string>
+                                                                                                                                                                            <normal>
+                                                                                                                                                                                <condition id="canPayUpgrade">
+                                                                                                                                                                                    <string id="upgrade name">JetterShotAttackspeed2</string>
+                                                                                                                                                                                    <normal>
+                                                                                                                                                                                        <action id="buyUpgrade">
+                                                                                                                                                                                            <string id="upgrade name">JetterShotAttackspeed2</string>
+                                                                                                                                                                                        </action>
+                                                                                                                                                                                    </normal>
+                                                                                                                                                                                </condition>
+                                                                                                                                                                            </normal>
+                                                                                                                                                                            <else>
+                                                                                                                                                                                <condition id="isUpgradeEnabled">
+                                                                                                                                                                                    <string id="condition" values="yesno">no</string>
+                                                                                                                                                                                    <string id="upgrade name">addHealth1</string>
+                                                                                                                                                                                    <normal>
+                                                                                                                                                                                        <condition id="canPayUpgrade">
+                                                                                                                                                                                            <string id="upgrade name">addHealth1</string>
+                                                                                                                                                                                            <normal>
+                                                                                                                                                                                                <action id="buyUpgrade">
+                                                                                                                                                                                                    <string id="upgrade name">addHealth1</string>
+                                                                                                                                                                                                </action>
+                                                                                                                                                                                            </normal>
+                                                                                                                                                                                        </condition>
+                                                                                                                                                                                    </normal>
+                                                                                                                                                                                    <else>
+                                                                                                                                                                                        <condition id="isUpgradeEnabled">
+                                                                                                                                                                                            <string id="condition" values="yesno">no</string>
+                                                                                                                                                                                            <string id="upgrade name">addHealth2</string>
+                                                                                                                                                                                            <normal>
+                                                                                                                                                                                                <condition id="canPayUpgrade">
+                                                                                                                                                                                                    <string id="upgrade name">addHealth2</string>
+                                                                                                                                                                                                    <normal>
+                                                                                                                                                                                                        <action id="buyUpgrade">
+                                                                                                                                                                                                            <string id="upgrade name">addHealth2</string>
+                                                                                                                                                                                                        </action>
+                                                                                                                                                                                                    </normal>
+                                                                                                                                                                                                </condition>
+                                                                                                                                                                                            </normal>
+                                                                                                                                                                                            <else>
+                                                                                                                                                                                                <condition id="isUpgradeEnabled">
+                                                                                                                                                                                                    <string id="condition" values="yesno">no</string>
+                                                                                                                                                                                                    <string id="upgrade name">addHealth3</string>
+                                                                                                                                                                                                    <normal>
+                                                                                                                                                                                                        <condition id="canPayUpgrade">
+                                                                                                                                                                                                            <string id="upgrade name">addHealth3</string>
+                                                                                                                                                                                                            <normal>
+                                                                                                                                                                                                                <action id="buyUpgrade">
+                                                                                                                                                                                                                    <string id="upgrade name">addHealth3</string>
+                                                                                                                                                                                                                </action>
+                                                                                                                                                                                                            </normal>
+                                                                                                                                                                                                        </condition>
+                                                                                                                                                                                                    </normal>
+                                                                                                                                                                                                </condition>
+                                                                                                                                                                                            </else>
+                                                                                                                                                                                        </condition>
+                                                                                                                                                                                    </else>
+                                                                                                                                                                                </condition>
+                                                                                                                                                                            </else>
+                                                                                                                                                                        </condition>
+                                                                                                                                                                    </else>
+                                                                                                                                                                </condition>
+                                                                                                                                                            </else>
+                                                                                                                                                        </condition>
+                                                                                                                                                    </else>
+                                                                                                                                                </condition>
+                                                                                                                                            </else>
+                                                                                                                                        </condition>
+                                                                                                                                    </else>
+                                                                                                                                </condition>
+                                                                                                                            </else>
+                                                                                                                        </condition>
+                                                                                                                    </else>
+                                                                                                                </condition>
+                                                                                                            </else>
+                                                                                                        </condition>
+                                                                                                    </else>
+                                                                                                </condition>
+                                                                                            </else>
+                                                                                        </condition>
+                                                                                    </else>
+                                                                                </condition>
+                                                                            </else>
+                                                                        </condition>
+                                                                    </else>
+                                                                </condition>
+                                                            </else>
+                                                        </condition>
+                                                    </else>
+                                                </condition>
+                                            </else>
+                                        </condition>
+                                    </else>
+                                </condition>
+                            </else>
+                        </condition>
+                    </normal>
+                </condition>
+            </normal>
+        </root>
+    </behaviour>
+</enemy>
