@@ -21,6 +21,55 @@
                         </action>
                     </normal>
                 </condition>
+                <andblock>
+                    <string id="Comment">Free myself from hook</string>
+                    <normal>
+                        <action id="selectTarget">
+                            <string id="groups to select" values="target groups" multiselect="true">CREEPS;;</string>
+                            <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
+                            <string id="class">CreepCaptainChain</string>
+                            <string id="remove if not found" values="yesno">no</string>
+                            <float id="xOffset">0.00</float>
+                            <float id="yOffset">0.00</float>
+                            <float id="width">0.60</float>
+                            <float id="height">0.60</float>
+                            <string id="compare method" values="valuecompare2">greater or equal</string>
+                            <float id="health value">0.00</float>
+                            <string id="distance check" values="distance check">NONE</string>
+                            <string id="check line of sight" values="yesno">yes</string>
+                            <string id="ignore invisibility" values="yesno">yes</string>
+                        </action>
+                    </normal>
+                    <or>
+                        <condition id="doesClassExist">
+                            <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;</string>
+                            <string id="class">Captain</string>
+                        </condition>
+                        <condition id="getBoolEquals">
+                            <string id="id">IgnoreAnchor</string>
+                            <string id="value" values="yesno">no</string>
+                        </condition>
+                        <condition id="hasUpgrade">
+                            <string id="class">Captain</string>
+                            <string id="team" values="teamswithnumbers">ENEMY_TEAM</string>
+                            <string id="upgrade name">CaptainDrop</string>
+                        </condition>
+                        <condition id="isCharacterInArea">
+                            <string id="groups" values="target receive groups" multiselect="true">CREEPS;;</string>
+                            <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
+                            <string id="class">CreepCaptainChain</string>
+                            <string id="condition" values="charactervaluesCheckable">health</string>
+                            <string id="comparison" values="valuecompare">greater or equal</string>
+                            <float id="value">0.00</float>
+                            <string id="character minimum"></string>
+                            <float id="xOffset">0.00</float>
+                            <float id="yOffset">0.00</float>
+                            <float id="width">0.60</float>
+                            <float id="height">0.60</float>
+                            <string id="check line of sight" values="yesno">yes</string>
+                        </condition>
+                    </or>
+                </andblock>
                 <condition id="isSkillOnButtonAvailable">
                     <string id="button" values="buttons">FACE_RIGHT</string>
                     <string id="Comment">Mine deploying</string>
@@ -395,6 +444,11 @@
                         <condition id="checkCounter">
                             <string id="id">state</string>
                             <string id="value">11</string>
+                            <string id="compare method" values="valuecompare">equal</string>
+                        </condition>
+                        <condition id="checkCounter">
+                            <string id="id">jumpTicks</string>
+                            <string id="value">0</string>
                             <string id="compare method" values="valuecompare">equal</string>
                         </condition>
                     </or>
