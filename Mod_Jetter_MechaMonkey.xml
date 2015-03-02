@@ -21,55 +21,6 @@
                         </action>
                     </normal>
                 </condition>
-                <andblock>
-                    <string id="Comment">Free myself from hook</string>
-                    <normal>
-                        <action id="selectTarget">
-                            <string id="groups to select" values="target groups" multiselect="true">CREEPS;;</string>
-                            <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
-                            <string id="class">CreepCaptainChain</string>
-                            <string id="remove if not found" values="yesno">no</string>
-                            <float id="xOffset">0.00</float>
-                            <float id="yOffset">0.00</float>
-                            <float id="width">0.60</float>
-                            <float id="height">0.60</float>
-                            <string id="compare method" values="valuecompare2">greater or equal</string>
-                            <float id="health value">0.00</float>
-                            <string id="distance check" values="distance check">NONE</string>
-                            <string id="check line of sight" values="yesno">yes</string>
-                            <string id="ignore invisibility" values="yesno">yes</string>
-                        </action>
-                    </normal>
-                    <or>
-                        <condition id="doesClassExist">
-                            <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;</string>
-                            <string id="class">Captain</string>
-                        </condition>
-                        <condition id="getBoolEquals">
-                            <string id="id">IgnoreAnchor</string>
-                            <string id="value" values="yesno">no</string>
-                        </condition>
-                        <condition id="hasUpgrade">
-                            <string id="class">Captain</string>
-                            <string id="team" values="teamswithnumbers">ENEMY_TEAM</string>
-                            <string id="upgrade name">CaptainDrop</string>
-                        </condition>
-                        <condition id="isCharacterInArea">
-                            <string id="groups" values="target receive groups" multiselect="true">CREEPS;;</string>
-                            <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
-                            <string id="class">CreepCaptainChain</string>
-                            <string id="condition" values="charactervaluesCheckable">health</string>
-                            <string id="comparison" values="valuecompare">greater or equal</string>
-                            <float id="value">0.00</float>
-                            <string id="character minimum"></string>
-                            <float id="xOffset">0.00</float>
-                            <float id="yOffset">0.00</float>
-                            <float id="width">0.60</float>
-                            <float id="height">0.60</float>
-                            <string id="check line of sight" values="yesno">yes</string>
-                        </condition>
-                    </or>
-                </andblock>
                 <condition id="isSkillOnButtonAvailable">
                     <string id="button" values="buttons">FACE_RIGHT</string>
                     <string id="Comment">Mine deploying</string>
@@ -536,29 +487,38 @@
                 <andblock>
                     <string id="Comment">Don&apos;t get stuck sitting at corners</string>
                     <normal>
-                        <action id="setBool">
-                            <string id="id">DownJump</string>
-                            <string id="value" values="flagtoggle">no</string>
-                        </action>
-                        <action id="setBool">
-                            <string id="id">jump</string>
-                            <string id="value" values="flagtoggle">yes</string>
+                        <action id="adjustCounter">
+                            <string id="id">jumpTicks</string>
+                            <string id="value">1</string>
+                            <string id="adjust method" values="valueadjust">set</string>
                         </action>
                     </normal>
                     <or>
                         <condition id="isInArea">
                             <string id="condition" values="yesno">yes</string>
-                            <string id="collision groups" values="collison groups" multiselect="true">PLAYERS;;CREEPS;;INVINCIBLE_OBSTACLES;;DESTROYABLE_OBSTACLES;;</string>
+                            <string id="collision groups" values="collison groups" multiselect="true">INVINCIBLE_OBSTACLES;;</string>
                             <string id="check green obstacles only" values="yesno">no</string>
                             <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
                             <string id="areaName"></string>
                             <float id="xOffset">0.04</float>
-                            <float id="yOffset">0.00</float>
+                            <float id="yOffset">0.03</float>
                             <float id="width">0.08</float>
                             <float id="height">0.05</float>
                             <string id="check line of sight" values="yesno">no</string>
                             <string id="ignore invisibility" values="yesno">yes</string>
-                            <string id="Comment">check walls &amp; enemies</string>
+                        </condition>
+                        <condition id="isInArea">
+                            <string id="condition" values="yesno">yes</string>
+                            <string id="collision groups" values="collison groups" multiselect="true">INVINCIBLE_OBSTACLES;;</string>
+                            <string id="check green obstacles only" values="yesno">no</string>
+                            <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
+                            <string id="areaName"></string>
+                            <float id="xOffset">-0.04</float>
+                            <float id="yOffset">-0.30</float>
+                            <float id="width">0.08</float>
+                            <float id="height">0.05</float>
+                            <string id="check line of sight" values="yesno">no</string>
+                            <string id="ignore invisibility" values="yesno">yes</string>
                         </condition>
                         <condition id="isInArea">
                             <string id="condition" values="yesno">no</string>
@@ -572,11 +532,11 @@
                             <float id="height">0.05</float>
                             <string id="check line of sight" values="yesno">no</string>
                             <string id="ignore invisibility" values="yesno">yes</string>
-                            <string id="Comment">check walls &amp; enemies</string>
                         </condition>
-                        <condition id="getBoolEquals">
-                            <string id="id">GoForward</string>
-                            <string id="value" values="yesno">yes</string>
+                        <condition id="checkCounter">
+                            <string id="id">jumpTicks</string>
+                            <string id="value">0</string>
+                            <string id="compare method" values="valuecompare">equal</string>
                         </condition>
                     </or>
                 </andblock>
