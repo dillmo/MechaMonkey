@@ -37,6 +37,37 @@
                     </or>
                 </orblock>
                 <condition id="isInNamedArea">
+                    <string id="area name">HealArea</string>
+                    <string id="team" values="ownenemy">OWN_TEAM</string>
+                    <string id="who" values="targetself">self</string>
+                    <string id="Comment">Remain in shop for 2 seconds</string>
+                    <normal>
+                        <condition id="checkCounter">
+                            <string id="id">shopCounter</string>
+                            <string id="value">20</string>
+                            <string id="compare method" values="valuecompare">less</string>
+                            <normal>
+                                <action id="setBool">
+                                    <string id="id">DontMove</string>
+                                    <string id="value" values="flagtoggle">yes</string>
+                                </action>
+                            </normal>
+                        </condition>
+                        <action id="adjustCounter">
+                            <string id="id">shopCounter</string>
+                            <string id="value">1</string>
+                            <string id="adjust method" values="valueadjust">add</string>
+                        </action>
+                    </normal>
+                    <else>
+                        <action id="adjustCounter">
+                            <string id="id">shopCounter</string>
+                            <string id="value">0</string>
+                            <string id="adjust method" values="valueadjust">set</string>
+                        </action>
+                    </else>
+                </condition>
+                <condition id="isInNamedArea">
                     <string id="area name">HEALAREA</string>
                     <string id="team" values="ownenemy">OWN_TEAM</string>
                     <string id="who" values="targetself">self</string>
