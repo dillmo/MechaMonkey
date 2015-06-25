@@ -8,7 +8,7 @@
                     <string id="Minimized">yes</string>
                 </action>
                 <action id="executeBehaviourTree">
-                    <string id="fileName">Mod_VeankoAI</string>
+                    <string id="fileName">VeankoAI</string>
                     <string id="Minimized">yes</string>
                 </action>
                 <condition id="once">
@@ -16,7 +16,7 @@
                     <normal>
                         <action id="adjustCharacterValue">
                             <string id="property" values="charactervaluesAdjustable">gold</string>
-                            <float id="value">35.00</float>
+                            <float id="value">40.00</float>
                             <string id="adjust method" values="valueadjust">add</string>
                         </action>
                     </normal>
@@ -86,13 +86,37 @@
                                         </action>
                                     </normal>
                                     <else>
-                                        <andblock>
-                                            <string id="Comment">Use to escape Explode</string>
+                                        <condition id="getBoolEquals">
+                                            <string id="id">RetreatingFromNauts</string>
+                                            <string id="value" values="yesno">yes</string>
+                                            <string id="Comment">Use to escape burst</string>
                                             <normal>
-                                                <action id="pressButton">
-                                                    <string id="button" values="buttons">FACE_TOP</string>
-                                                    <float id="duration in seconds">0.00</float>
-                                                </action>
+                                                <orblock>
+                                                    <normal>
+                                                        <action id="pressButton">
+                                                            <string id="button" values="buttons">FACE_TOP</string>
+                                                            <float id="duration in seconds">0.00</float>
+                                                        </action>
+                                                    </normal>
+                                                    <or>
+                                                        <condition id="checkClass">
+                                                            <string id="check on" values="targetself">target</string>
+                                                            <string id="class">Tank</string>
+                                                        </condition>
+                                                        <condition id="checkClass">
+                                                            <string id="check on" values="targetself">target</string>
+                                                            <string id="class">Blinker</string>
+                                                        </condition>
+                                                        <condition id="checkClass">
+                                                            <string id="check on" values="targetself">target</string>
+                                                            <string id="class">Paladin</string>
+                                                        </condition>
+                                                        <condition id="checkClass">
+                                                            <string id="check on" values="targetself">target</string>
+                                                            <string id="class">Vampire</string>
+                                                        </condition>
+                                                    </or>
+                                                </orblock>
                                             </normal>
                                             <else>
                                                 <andblock>
@@ -141,17 +165,7 @@
                                                     </or>
                                                 </andblock>
                                             </else>
-                                            <or>
-                                                <condition id="getBoolEquals">
-                                                    <string id="id">RetreatingFromNauts</string>
-                                                    <string id="value" values="yesno">yes</string>
-                                                </condition>
-                                                <condition id="checkClass">
-                                                    <string id="check on" values="targetself">target</string>
-                                                    <string id="class">Tank</string>
-                                                </condition>
-                                            </or>
-                                        </andblock>
+                                        </condition>
                                     </else>
                                     <or>
                                         <condition id="checkCounter">
