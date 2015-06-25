@@ -27,10 +27,64 @@
                     <normal>
                         <orblock>
                             <normal>
-                                <action id="pressButton">
-                                    <string id="button" values="buttons">FACE_RIGHT</string>
-                                    <float id="duration in seconds">0.00</float>
-                                </action>
+                                <condition id="isInArea">
+                                    <string id="condition" values="yesno">yes</string>
+                                    <string id="collision groups" values="collison groups" multiselect="true">PLAYERS;;</string>
+                                    <string id="check green obstacles only" values="yesno">no</string>
+                                    <string id="count characters out of combat" values="yesno">yes</string>
+                                    <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;</string>
+                                    <string id="areaName"></string>
+                                    <float id="xOffset">0.00</float>
+                                    <float id="yOffset">0.00</float>
+                                    <float id="width">0.30</float>
+                                    <float id="height">0.30</float>
+                                    <string id="check line of sight" values="yesno">no</string>
+                                    <string id="ignore invisibility" values="yesno">no</string>
+                                    <string id="Comment">Nearby enemies</string>
+                                    <normal>
+                                        <andblock>
+                                            <string id="Comment">Do NOT attack Sentry while he charges</string>
+                                            <else>
+                                                <action id="pressButton">
+                                                    <string id="button" values="buttons">FACE_RIGHT</string>
+                                                    <float id="duration in seconds">0.00</float>
+                                                </action>
+                                            </else>
+                                            <or>
+                                                <condition id="getBoolEquals">
+                                                    <string id="id">RetreatingFromNauts</string>
+                                                    <string id="value" values="yesno">yes</string>
+                                                </condition>
+                                                <condition id="checkClass">
+                                                    <string id="check on" values="targetself">target</string>
+                                                    <string id="class">Spy</string>
+                                                </condition>
+                                            </or>
+                                        </andblock>
+                                    </normal>
+                                    <else>
+                                        <andblock>
+                                            <string id="Comment">Don&apos;t use when invisible and fighting &apos;Nauts</string>
+                                            <else>
+                                                <action id="pressButton">
+                                                    <string id="button" values="buttons">FACE_RIGHT</string>
+                                                    <float id="duration in seconds">0.00</float>
+                                                </action>
+                                            </else>
+                                            <or>
+                                                <condition id="checkCharacterFlag">
+                                                    <string id="property" values="characterflags">IsStealth</string>
+                                                    <string id="condition" values="yesno">yes</string>
+                                                    <string id="check on" values="targetself">self</string>
+                                                </condition>
+                                                <condition id="isTargetType">
+                                                    <string id="condition" values="yesno">yes</string>
+                                                    <string id="target groups" values="target groups" multiselect="true">PLAYERS;;</string>
+                                                </condition>
+                                            </or>
+                                        </andblock>
+                                    </else>
+                                </condition>
                             </normal>
                             <or>
                                 <condition id="isInArea">
@@ -71,65 +125,30 @@
                     <string id="button" values="buttons">FACE_TOP</string>
                     <string id="Comment">Time warp</string>
                     <normal>
-                        <condition id="isInNamedArea">
-                            <string id="area name">HEALAREA</string>
-                            <string id="team" values="ownenemy">OWN_TEAM</string>
-                            <string id="who" values="targetself">self</string>
-                            <string id="Comment">Don&apos;t waste it in the shop</string>
+                        <andblock>
+                            <string id="Comment">Don&apos;t use when invisible and fighting &apos;Nauts</string>
                             <else>
-                                <orblock>
-                                    <string id="Comment">Use to retreat</string>
-                                    <normal>
-                                        <action id="pressButton">
-                                            <string id="button" values="buttons">FACE_TOP</string>
-                                            <float id="duration in seconds">0.00</float>
-                                        </action>
-                                    </normal>
+                                <condition id="isInNamedArea">
+                                    <string id="area name">HEALAREA</string>
+                                    <string id="team" values="ownenemy">OWN_TEAM</string>
+                                    <string id="who" values="targetself">self</string>
+                                    <string id="Comment">Don&apos;t waste it in the shop</string>
                                     <else>
-                                        <condition id="getBoolEquals">
-                                            <string id="id">RetreatingFromNauts</string>
-                                            <string id="value" values="yesno">yes</string>
-                                            <string id="Comment">Use to escape burst</string>
+                                        <orblock>
+                                            <string id="Comment">Use to retreat</string>
                                             <normal>
-                                                <orblock>
-                                                    <normal>
-                                                        <action id="pressButton">
-                                                            <string id="button" values="buttons">FACE_TOP</string>
-                                                            <float id="duration in seconds">0.00</float>
-                                                        </action>
-                                                    </normal>
-                                                    <or>
-                                                        <condition id="checkClass">
-                                                            <string id="check on" values="targetself">target</string>
-                                                            <string id="class">Tank</string>
-                                                        </condition>
-                                                        <condition id="checkClass">
-                                                            <string id="check on" values="targetself">target</string>
-                                                            <string id="class">Blinker</string>
-                                                        </condition>
-                                                        <condition id="checkClass">
-                                                            <string id="check on" values="targetself">target</string>
-                                                            <string id="class">Paladin</string>
-                                                        </condition>
-                                                        <condition id="checkClass">
-                                                            <string id="check on" values="targetself">target</string>
-                                                            <string id="class">Vampire</string>
-                                                        </condition>
-                                                    </or>
-                                                </orblock>
+                                                <action id="pressButton">
+                                                    <string id="button" values="buttons">FACE_TOP</string>
+                                                    <float id="duration in seconds">0.00</float>
+                                                </action>
                                             </normal>
                                             <else>
-                                                <andblock>
-                                                    <string id="Comment">Use to chase</string>
+                                                <condition id="getBoolEquals">
+                                                    <string id="id">RetreatingFromNauts</string>
+                                                    <string id="value" values="yesno">yes</string>
+                                                    <string id="Comment">Use to escape burst</string>
                                                     <normal>
-                                                        <action id="pressButton">
-                                                            <string id="button" values="buttons">FACE_TOP</string>
-                                                            <float id="duration in seconds">0.00</float>
-                                                        </action>
-                                                    </normal>
-                                                    <else>
-                                                        <andblock>
-                                                            <string id="Comment">Use to heal</string>
+                                                        <orblock>
                                                             <normal>
                                                                 <action id="pressButton">
                                                                     <string id="button" values="buttons">FACE_TOP</string>
@@ -137,108 +156,186 @@
                                                                 </action>
                                                             </normal>
                                                             <or>
+                                                                <condition id="checkClass">
+                                                                    <string id="check on" values="targetself">target</string>
+                                                                    <string id="class">Tank</string>
+                                                                </condition>
+                                                                <condition id="checkClass">
+                                                                    <string id="check on" values="targetself">target</string>
+                                                                    <string id="class">Blinker</string>
+                                                                </condition>
+                                                                <condition id="checkClass">
+                                                                    <string id="check on" values="targetself">target</string>
+                                                                    <string id="class">Paladin</string>
+                                                                </condition>
+                                                                <condition id="checkClass">
+                                                                    <string id="check on" values="targetself">target</string>
+                                                                    <string id="class">Vampire</string>
+                                                                </condition>
+                                                            </or>
+                                                        </orblock>
+                                                    </normal>
+                                                    <else>
+                                                        <andblock>
+                                                            <string id="Comment">Use to chase</string>
+                                                            <normal>
+                                                                <action id="pressButton">
+                                                                    <string id="button" values="buttons">FACE_TOP</string>
+                                                                    <float id="duration in seconds">0.00</float>
+                                                                </action>
+                                                            </normal>
+                                                            <else>
+                                                                <andblock>
+                                                                    <string id="Comment">Use to heal</string>
+                                                                    <normal>
+                                                                        <action id="pressButton">
+                                                                            <string id="button" values="buttons">FACE_TOP</string>
+                                                                            <float id="duration in seconds">0.00</float>
+                                                                        </action>
+                                                                    </normal>
+                                                                    <or>
+                                                                        <condition id="checkCharacterValue">
+                                                                            <string id="property" values="charactervaluesCheckable">health minus dot percentage</string>
+                                                                            <float id="value">90.00</float>
+                                                                            <string id="compare method" values="valuecompare">less or equal</string>
+                                                                            <string id="check on" values="targetself">self</string>
+                                                                        </condition>
+                                                                        <condition id="isUpgradeEnabled">
+                                                                            <string id="condition" values="yesno">yes</string>
+                                                                            <string id="upgrade name">JetterTimebubbleHeal1</string>
+                                                                        </condition>
+                                                                    </or>
+                                                                </andblock>
+                                                            </else>
+                                                            <or>
+                                                                <condition id="checkCounter">
+                                                                    <string id="id">state</string>
+                                                                    <string id="value">4</string>
+                                                                    <string id="compare method" values="valuecompare">equal</string>
+                                                                </condition>
                                                                 <condition id="checkCharacterValue">
                                                                     <string id="property" values="charactervaluesCheckable">health minus dot percentage</string>
-                                                                    <float id="value">90.00</float>
+                                                                    <float id="value">50.00</float>
                                                                     <string id="compare method" values="valuecompare">less or equal</string>
-                                                                    <string id="check on" values="targetself">self</string>
-                                                                </condition>
-                                                                <condition id="isUpgradeEnabled">
-                                                                    <string id="condition" values="yesno">yes</string>
-                                                                    <string id="upgrade name">JetterTimebubbleHeal1</string>
+                                                                    <string id="check on" values="targetself">target</string>
                                                                 </condition>
                                                             </or>
                                                         </andblock>
                                                     </else>
-                                                    <or>
-                                                        <condition id="checkCounter">
-                                                            <string id="id">state</string>
-                                                            <string id="value">4</string>
-                                                            <string id="compare method" values="valuecompare">equal</string>
-                                                        </condition>
-                                                        <condition id="checkCharacterValue">
-                                                            <string id="property" values="charactervaluesCheckable">health minus dot percentage</string>
-                                                            <float id="value">50.00</float>
-                                                            <string id="compare method" values="valuecompare">less or equal</string>
-                                                            <string id="check on" values="targetself">target</string>
-                                                        </condition>
-                                                    </or>
-                                                </andblock>
+                                                </condition>
                                             </else>
-                                        </condition>
+                                            <or>
+                                                <condition id="checkCounter">
+                                                    <string id="id">state</string>
+                                                    <string id="value">1</string>
+                                                    <string id="compare method" values="valuecompare">equal</string>
+                                                </condition>
+                                                <condition id="checkCounter">
+                                                    <string id="id">state</string>
+                                                    <string id="value">10</string>
+                                                    <string id="compare method" values="valuecompare">equal</string>
+                                                </condition>
+                                            </or>
+                                        </orblock>
                                     </else>
-                                    <or>
-                                        <condition id="checkCounter">
-                                            <string id="id">state</string>
-                                            <string id="value">1</string>
-                                            <string id="compare method" values="valuecompare">equal</string>
-                                        </condition>
-                                        <condition id="checkCounter">
-                                            <string id="id">state</string>
-                                            <string id="value">10</string>
-                                            <string id="compare method" values="valuecompare">equal</string>
-                                        </condition>
-                                    </or>
-                                </orblock>
+                                </condition>
+                            </else>
+                            <or>
+                                <condition id="checkCharacterFlag">
+                                    <string id="property" values="characterflags">IsStealth</string>
+                                    <string id="condition" values="yesno">yes</string>
+                                    <string id="check on" values="targetself">self</string>
+                                </condition>
+                                <condition id="isTargetType">
+                                    <string id="condition" values="yesno">yes</string>
+                                    <string id="target groups" values="target groups" multiselect="true">PLAYERS;;</string>
+                                </condition>
+                            </or>
+                        </andblock>
+                    </normal>
+                </condition>
+                <condition id="checkCounter">
+                    <string id="id">state</string>
+                    <string id="value">11</string>
+                    <string id="compare method" values="valuecompare">equal</string>
+                    <string id="Comment">Don&apos;t ruin retreats with Laser</string>
+                    <normal>
+                        <condition id="isTurretInArea">
+                            <string id="teams" values="teams" multiselect="true">OWN_TEAM;;</string>
+                            <string id="health comparison" values="valuecompare">less</string>
+                            <float id="health">0.00</float>
+                            <float id="xOffset">0.00</float>
+                            <float id="yOffset">0.00</float>
+                            <float id="width">0.40</float>
+                            <float id="height">0.40</float>
+                            <string id="check line of sight" values="yesno">yes</string>
+                            <normal>
+                                <action id="setBool">
+                                    <string id="id">dontLaser</string>
+                                    <string id="value" values="flagtoggle">no</string>
+                                </action>
+                            </normal>
+                            <else>
+                                <action id="setBool">
+                                    <string id="id">dontLaser</string>
+                                    <string id="value" values="flagtoggle">yes</string>
+                                </action>
                             </else>
                         </condition>
                     </normal>
+                    <else>
+                        <action id="setBool">
+                            <string id="id">dontLaser</string>
+                            <string id="value" values="flagtoggle">no</string>
+                        </action>
+                    </else>
                 </condition>
                 <orblock>
                     <string id="Comment">Laser</string>
                     <normal>
                         <andblock>
-                            <normal>
+                            <string id="Comment">Do NOT attack Sentry while he charges</string>
+                            <else>
                                 <andblock>
+                                    <string id="Comment">Don&apos;t use when invisible and fighting &apos;Nauts</string>
                                     <else>
                                         <andblock>
-                                            <string id="Comment">I have trouble damaging creeps if I&apos;m on the ground</string>
                                             <normal>
-                                                <action id="setBool">
-                                                    <string id="id">jump</string>
-                                                    <string id="value" values="flagtoggle">yes</string>
-                                                </action>
-                                            </normal>
-                                            <else>
                                                 <andblock>
-                                                    <string id="Comment">Don&apos;t screw up close combat</string>
-                                                    <normal>
-                                                        <condition id="isTargetInArea">
-                                                            <string id="condition" values="yesno">yes</string>
-                                                            <float id="xOffset">0.00</float>
-                                                            <float id="yOffset">0.00</float>
-                                                            <float id="width">0.50</float>
-                                                            <float id="height">0.50</float>
-                                                            <string id="check line of sight" values="yesno">yes</string>
-                                                            <string id="ignore invisibility" values="yesno">yes</string>
+                                                    <else>
+                                                        <andblock>
+                                                            <string id="Comment">I have trouble damaging creeps if I&apos;m on the ground</string>
                                                             <normal>
                                                                 <action id="setBool">
-                                                                    <string id="id">aimLaser</string>
+                                                                    <string id="id">jump</string>
                                                                     <string id="value" values="flagtoggle">yes</string>
                                                                 </action>
-                                                                <action id="pressButton">
-                                                                    <string id="button" values="buttons">FACE_LEFT</string>
-                                                                    <float id="duration in seconds">0.10</float>
-                                                                </action>
                                                             </normal>
-                                                        </condition>
-                                                    </normal>
-                                                    <else>
-                                                        <condition id="checkCounter">
-                                                            <string id="id">state</string>
-                                                            <string id="value">11</string>
-                                                            <string id="compare method" values="valuecompare">equal</string>
-                                                            <normal>
-                                                                <condition id="isTurretInArea">
-                                                                    <string id="teams" values="teams" multiselect="true">OWN_TEAM;;</string>
-                                                                    <string id="health comparison" values="valuecompare">greater or equal</string>
-                                                                    <float id="health">0.00</float>
-                                                                    <float id="xOffset">0.00</float>
-                                                                    <float id="yOffset">0.00</float>
-                                                                    <float id="width">0.10</float>
-                                                                    <float id="height">0.10</float>
-                                                                    <string id="check line of sight" values="yesno">no</string>
+                                                            <else>
+                                                                <andblock>
+                                                                    <string id="Comment">Don&apos;t screw up close combat</string>
                                                                     <normal>
+                                                                        <condition id="isTargetInArea">
+                                                                            <string id="condition" values="yesno">yes</string>
+                                                                            <float id="xOffset">0.00</float>
+                                                                            <float id="yOffset">0.00</float>
+                                                                            <float id="width">0.50</float>
+                                                                            <float id="height">0.50</float>
+                                                                            <string id="check line of sight" values="yesno">yes</string>
+                                                                            <string id="ignore invisibility" values="yesno">yes</string>
+                                                                            <normal>
+                                                                                <action id="setBool">
+                                                                                    <string id="id">aimLaser</string>
+                                                                                    <string id="value" values="flagtoggle">yes</string>
+                                                                                </action>
+                                                                                <action id="pressButton">
+                                                                                    <string id="button" values="buttons">FACE_LEFT</string>
+                                                                                    <float id="duration in seconds">0.10</float>
+                                                                                </action>
+                                                                            </normal>
+                                                                        </condition>
+                                                                    </normal>
+                                                                    <else>
                                                                         <condition id="isUpgradeEnabled">
                                                                             <string id="condition" values="yesno">yes</string>
                                                                             <string id="upgrade name">JetterSummonerShotRange</string>
@@ -286,113 +383,89 @@
                                                                                 </condition>
                                                                             </else>
                                                                         </condition>
-                                                                    </normal>
-                                                                </condition>
-                                                            </normal>
-                                                            <else>
-                                                                <condition id="isUpgradeEnabled">
-                                                                    <string id="condition" values="yesno">yes</string>
-                                                                    <string id="upgrade name">JetterSummonerShotRange</string>
-                                                                    <string id="Comment">Giant Monocle</string>
-                                                                    <normal>
-                                                                        <condition id="isTargetInArea">
-                                                                            <string id="condition" values="yesno">yes</string>
-                                                                            <float id="xOffset">0.00</float>
-                                                                            <float id="yOffset">0.00</float>
-                                                                            <float id="width">0.93</float>
-                                                                            <float id="height">0.93</float>
-                                                                            <string id="check line of sight" values="yesno">yes</string>
-                                                                            <string id="ignore invisibility" values="yesno">yes</string>
-                                                                            <normal>
-                                                                                <action id="setBool">
-                                                                                    <string id="id">aimLaser</string>
-                                                                                    <string id="value" values="flagtoggle">yes</string>
-                                                                                </action>
-                                                                                <action id="pressButton">
-                                                                                    <string id="button" values="buttons">FACE_LEFT</string>
-                                                                                    <float id="duration in seconds">0.10</float>
-                                                                                </action>
-                                                                            </normal>
-                                                                        </condition>
-                                                                    </normal>
-                                                                    <else>
-                                                                        <condition id="isTargetInArea">
-                                                                            <string id="condition" values="yesno">yes</string>
-                                                                            <float id="xOffset">0.00</float>
-                                                                            <float id="yOffset">0.00</float>
-                                                                            <float id="width">0.74</float>
-                                                                            <float id="height">0.74</float>
-                                                                            <string id="check line of sight" values="yesno">yes</string>
-                                                                            <string id="ignore invisibility" values="yesno">yes</string>
-                                                                            <normal>
-                                                                                <action id="setBool">
-                                                                                    <string id="id">aimLaser</string>
-                                                                                    <string id="value" values="flagtoggle">yes</string>
-                                                                                </action>
-                                                                                <action id="pressButton">
-                                                                                    <string id="button" values="buttons">FACE_LEFT</string>
-                                                                                    <float id="duration in seconds">0.10</float>
-                                                                                </action>
-                                                                            </normal>
-                                                                        </condition>
                                                                     </else>
-                                                                </condition>
+                                                                    <or>
+                                                                        <condition id="checkCounter">
+                                                                            <string id="id">state</string>
+                                                                            <string id="value">4</string>
+                                                                            <string id="compare method" values="valuecompare">equal</string>
+                                                                        </condition>
+                                                                        <condition id="getBoolEquals">
+                                                                            <string id="id">Outnumbered</string>
+                                                                            <string id="value" values="yesno">no</string>
+                                                                        </condition>
+                                                                    </or>
+                                                                </andblock>
                                                             </else>
-                                                        </condition>
+                                                            <or>
+                                                                <condition id="isTargetType">
+                                                                    <string id="condition" values="yesno">yes</string>
+                                                                    <string id="target groups" values="target groups" multiselect="true">CREEPS;;</string>
+                                                                </condition>
+                                                                <condition id="isOnGround">
+                                                                    <string id="condition" values="yesno">yes</string>
+                                                                    <string id="check on" values="targetself">self</string>
+                                                                </condition>
+                                                                <condition id="checkCounter">
+                                                                    <string id="id"></string>
+                                                                    <string id="value"></string>
+                                                                    <string id="compare method" values="valuecompare">equal</string>
+                                                                </condition>
+                                                            </or>
+                                                        </andblock>
                                                     </else>
                                                     <or>
                                                         <condition id="checkCounter">
-                                                            <string id="id">state</string>
-                                                            <string id="value">4</string>
-                                                            <string id="compare method" values="valuecompare">equal</string>
+                                                            <string id="id">laserCooldown</string>
+                                                            <string id="value">0</string>
+                                                            <string id="compare method" values="valuecompare">greater</string>
+                                                            <string id="Comment">Self-enforced cooldown to prevent moving Laser abuse</string>
                                                         </condition>
                                                         <condition id="getBoolEquals">
-                                                            <string id="id">Outnumbered</string>
+                                                            <string id="id">laseredLastTick</string>
                                                             <string id="value" values="yesno">no</string>
                                                         </condition>
                                                     </or>
                                                 </andblock>
-                                            </else>
+                                            </normal>
                                             <or>
-                                                <condition id="isTargetType">
-                                                    <string id="condition" values="yesno">yes</string>
-                                                    <string id="target groups" values="target groups" multiselect="true">CREEPS;;</string>
+                                                <condition id="getBoolEquals">
+                                                    <string id="id">MoveAwayFromTarget</string>
+                                                    <string id="value" values="yesno">no</string>
+                                                    <string id="Comment">Don&apos;t get uncomfortably close</string>
                                                 </condition>
-                                                <condition id="isOnGround">
-                                                    <string id="condition" values="yesno">yes</string>
-                                                    <string id="check on" values="targetself">self</string>
+                                                <condition id="getBoolEquals">
+                                                    <string id="id">RetreatingFromNauts</string>
+                                                    <string id="value" values="yesno">no</string>
                                                 </condition>
-                                                <condition id="checkCounter">
-                                                    <string id="id"></string>
-                                                    <string id="value"></string>
-                                                    <string id="compare method" values="valuecompare">equal</string>
+                                                <condition id="getBoolEquals">
+                                                    <string id="id">dontLaser</string>
+                                                    <string id="value" values="yesno">no</string>
                                                 </condition>
                                             </or>
                                         </andblock>
                                     </else>
                                     <or>
-                                        <condition id="checkCounter">
-                                            <string id="id">laserCooldown</string>
-                                            <string id="value">0</string>
-                                            <string id="compare method" values="valuecompare">greater</string>
-                                            <string id="Comment">Self-enforced cooldown to prevent moving Laser abuse</string>
+                                        <condition id="checkCharacterFlag">
+                                            <string id="property" values="characterflags">IsStealth</string>
+                                            <string id="condition" values="yesno">yes</string>
+                                            <string id="check on" values="targetself">self</string>
                                         </condition>
-                                        <condition id="getBoolEquals">
-                                            <string id="id">laseredLastTick</string>
-                                            <string id="value" values="yesno">no</string>
+                                        <condition id="isTargetType">
+                                            <string id="condition" values="yesno">yes</string>
+                                            <string id="target groups" values="target groups" multiselect="true">PLAYERS;;</string>
                                         </condition>
                                     </or>
                                 </andblock>
-                            </normal>
+                            </else>
                             <or>
                                 <condition id="getBoolEquals">
-                                    <string id="id">MoveAwayFromTarget</string>
-                                    <string id="value" values="yesno">no</string>
-                                    <string id="Comment">Don&apos;t get uncomfortably close</string>
-                                </condition>
-                                <condition id="getBoolEquals">
                                     <string id="id">RetreatingFromNauts</string>
-                                    <string id="value" values="yesno">no</string>
+                                    <string id="value" values="yesno">yes</string>
+                                </condition>
+                                <condition id="checkClass">
+                                    <string id="check on" values="targetself">target</string>
+                                    <string id="class">Spy</string>
                                 </condition>
                             </or>
                         </andblock>
@@ -500,6 +573,41 @@
                         </action>
                     </normal>
                 </condition>
+                <condition id="isInNamedArea">
+                    <string id="area name">HealArea</string>
+                    <string id="team" values="ownenemy">OWN_TEAM</string>
+                    <string id="who" values="targetself">self</string>
+                    <string id="Comment">Remain in shop for 2 seconds</string>
+                    <normal>
+                        <condition id="checkCounter">
+                            <string id="id">shopCounter</string>
+                            <string id="value">20</string>
+                            <string id="compare method" values="valuecompare">less</string>
+                            <normal>
+                                <action id="setBool">
+                                    <string id="id">DontMove</string>
+                                    <string id="value" values="flagtoggle">yes</string>
+                                </action>
+                            </normal>
+                        </condition>
+                        <action id="adjustCounter">
+                            <string id="id">shopCounter</string>
+                            <string id="value">1</string>
+                            <string id="adjust method" values="valueadjust">add</string>
+                        </action>
+                    </normal>
+                    <else>
+                        <action id="adjustCounter">
+                            <string id="id">shopCounter</string>
+                            <string id="value">0</string>
+                            <string id="adjust method" values="valueadjust">set</string>
+                        </action>
+                    </else>
+                </condition>
+                <action id="executeBehaviourTree">
+                    <string id="fileName">Mod_AwesomebotsCommonLib</string>
+                    <string id="Minimized">yes</string>
+                </action>
                 <condition id="getBoolEquals">
                     <string id="id">MoveAwayFromTarget</string>
                     <string id="value" values="yesno">yes</string>
