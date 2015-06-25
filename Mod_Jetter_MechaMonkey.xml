@@ -254,6 +254,57 @@
                         </andblock>
                     </normal>
                 </condition>
+                <condition id="isUpgradeEnabled">
+                    <string id="condition" values="yesno">yes</string>
+                    <string id="upgrade name">JetterSummonerShotRange</string>
+                    <string id="Comment">Check if target is in range of Laser</string>
+                    <normal>
+                        <condition id="isTargetInArea">
+                            <string id="condition" values="yesno">yes</string>
+                            <float id="xOffset">0.00</float>
+                            <float id="yOffset">0.00</float>
+                            <float id="width">0.93</float>
+                            <float id="height">0.93</float>
+                            <string id="check line of sight" values="yesno">yes</string>
+                            <string id="ignore invisibility" values="yesno">yes</string>
+                            <normal>
+                                <action id="setBool">
+                                    <string id="id">targetinLaserRange</string>
+                                    <string id="value" values="flagtoggle">yes</string>
+                                </action>
+                            </normal>
+                            <else>
+                                <action id="setBool">
+                                    <string id="id">targetinLaserRange</string>
+                                    <string id="value" values="flagtoggle">no</string>
+                                </action>
+                            </else>
+                        </condition>
+                    </normal>
+                    <else>
+                        <condition id="isTargetInArea">
+                            <string id="condition" values="yesno">yes</string>
+                            <float id="xOffset">0.00</float>
+                            <float id="yOffset">0.00</float>
+                            <float id="width">0.74</float>
+                            <float id="height">0.74</float>
+                            <string id="check line of sight" values="yesno">yes</string>
+                            <string id="ignore invisibility" values="yesno">yes</string>
+                            <normal>
+                                <action id="setBool">
+                                    <string id="id">targetinLaserRange</string>
+                                    <string id="value" values="flagtoggle">yes</string>
+                                </action>
+                            </normal>
+                            <else>
+                                <action id="setBool">
+                                    <string id="id">targetinLaserRange</string>
+                                    <string id="value" values="flagtoggle">no</string>
+                                </action>
+                            </else>
+                        </condition>
+                    </else>
+                </condition>
                 <condition id="checkCounter">
                     <string id="id">state</string>
                     <string id="value">11</string>
@@ -289,6 +340,44 @@
                             <string id="value" values="flagtoggle">no</string>
                         </action>
                     </else>
+                </condition>
+                <condition id="checkCharacterValue">
+                    <string id="property" values="charactervaluesCheckable">health minus dot percentage</string>
+                    <float id="value">50.00</float>
+                    <string id="compare method" values="valuecompare">greater</string>
+                    <string id="check on" values="targetself">target</string>
+                    <string id="Comment">Keep my distance when my target is not unhealthy</string>
+                    <normal>
+                        <condition id="getBoolEquals">
+                            <string id="id">targetInLaserRange</string>
+                            <string id="value" values="yesno">yes</string>
+                            <normal>
+                                <action id="setBool">
+                                    <string id="id">moveTowardsTarget</string>
+                                    <string id="value" values="flagtoggle">no</string>
+                                </action>
+                                <condition id="isTargetInArea">
+                                    <string id="condition" values="yesno">yes</string>
+                                    <float id="xOffset">0.00</float>
+                                    <float id="yOffset">0.00</float>
+                                    <float id="width">0.45</float>
+                                    <float id="height">0.45</float>
+                                    <string id="check line of sight" values="yesno">yes</string>
+                                    <string id="ignore invisibility" values="yesno">no</string>
+                                    <normal>
+                                        <action id="setBool">
+                                            <string id="id">moveAwayFromTarget</string>
+                                            <string id="value" values="flagtoggle">yes</string>
+                                        </action>
+                                        <action id="setBool">
+                                            <string id="id">retreatingFromNauts</string>
+                                            <string id="value" values="flagtoggle">yes</string>
+                                        </action>
+                                    </normal>
+                                </condition>
+                            </normal>
+                        </condition>
+                    </normal>
                 </condition>
                 <orblock>
                     <string id="Comment">Laser</string>
@@ -336,52 +425,19 @@
                                                                         </condition>
                                                                     </normal>
                                                                     <else>
-                                                                        <condition id="isUpgradeEnabled">
-                                                                            <string id="condition" values="yesno">yes</string>
-                                                                            <string id="upgrade name">JetterSummonerShotRange</string>
-                                                                            <string id="Comment">Giant Monocle</string>
+                                                                        <condition id="getBoolEquals">
+                                                                            <string id="id">targetInLaserRange</string>
+                                                                            <string id="value" values="yesno">yes</string>
                                                                             <normal>
-                                                                                <condition id="isTargetInArea">
-                                                                                    <string id="condition" values="yesno">yes</string>
-                                                                                    <float id="xOffset">0.00</float>
-                                                                                    <float id="yOffset">0.00</float>
-                                                                                    <float id="width">0.93</float>
-                                                                                    <float id="height">0.93</float>
-                                                                                    <string id="check line of sight" values="yesno">yes</string>
-                                                                                    <string id="ignore invisibility" values="yesno">yes</string>
-                                                                                    <normal>
-                                                                                        <action id="setBool">
-                                                                                            <string id="id">aimLaser</string>
-                                                                                            <string id="value" values="flagtoggle">yes</string>
-                                                                                        </action>
-                                                                                        <action id="pressButton">
-                                                                                            <string id="button" values="buttons">FACE_LEFT</string>
-                                                                                            <float id="duration in seconds">0.10</float>
-                                                                                        </action>
-                                                                                    </normal>
-                                                                                </condition>
+                                                                                <action id="setBool">
+                                                                                    <string id="id">aimLaser</string>
+                                                                                    <string id="value" values="flagtoggle">yes</string>
+                                                                                </action>
+                                                                                <action id="pressButton">
+                                                                                    <string id="button" values="buttons">FACE_LEFT</string>
+                                                                                    <float id="duration in seconds">0.10</float>
+                                                                                </action>
                                                                             </normal>
-                                                                            <else>
-                                                                                <condition id="isTargetInArea">
-                                                                                    <string id="condition" values="yesno">yes</string>
-                                                                                    <float id="xOffset">0.00</float>
-                                                                                    <float id="yOffset">0.00</float>
-                                                                                    <float id="width">0.74</float>
-                                                                                    <float id="height">0.74</float>
-                                                                                    <string id="check line of sight" values="yesno">yes</string>
-                                                                                    <string id="ignore invisibility" values="yesno">yes</string>
-                                                                                    <normal>
-                                                                                        <action id="setBool">
-                                                                                            <string id="id">aimLaser</string>
-                                                                                            <string id="value" values="flagtoggle">yes</string>
-                                                                                        </action>
-                                                                                        <action id="pressButton">
-                                                                                            <string id="button" values="buttons">FACE_LEFT</string>
-                                                                                            <float id="duration in seconds">0.10</float>
-                                                                                        </action>
-                                                                                    </normal>
-                                                                                </condition>
-                                                                            </else>
                                                                         </condition>
                                                                     </else>
                                                                     <or>
@@ -393,6 +449,12 @@
                                                                         <condition id="getBoolEquals">
                                                                             <string id="id">Outnumbered</string>
                                                                             <string id="value" values="yesno">no</string>
+                                                                        </condition>
+                                                                        <condition id="checkCharacterValue">
+                                                                            <string id="property" values="charactervaluesCheckable">health minus dot percentage</string>
+                                                                            <float id="value">50.00</float>
+                                                                            <string id="compare method" values="valuecompare">less</string>
+                                                                            <string id="check on" values="targetself">target</string>
                                                                         </condition>
                                                                     </or>
                                                                 </andblock>
