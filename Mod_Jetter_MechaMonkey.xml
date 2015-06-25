@@ -37,6 +37,7 @@
                                     <string id="condition" values="yesno">yes</string>
                                     <string id="collision groups" values="collison groups" multiselect="true">PLAYERS;;CREEPS;;DESTROYABLE_OBSTACLES;;</string>
                                     <string id="check green obstacles only" values="yesno">no</string>
+                                    <string id="count characters out of combat" values="yesno">yes</string>
                                     <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
                                     <string id="areaName"></string>
                                     <float id="xOffset">0.00</float>
@@ -51,6 +52,7 @@
                                     <string id="condition" values="yesno">yes</string>
                                     <string id="collision groups" values="collison groups" multiselect="true">INVINCIBLE_OBSTACLES;;</string>
                                     <string id="check green obstacles only" values="yesno">yes</string>
+                                    <string id="count characters out of combat" values="yesno">yes</string>
                                     <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
                                     <string id="areaName"></string>
                                     <float id="xOffset">0.00</float>
@@ -484,62 +486,6 @@
                         </action>
                     </normal>
                 </condition>
-                <andblock>
-                    <string id="Comment">Don&apos;t get stuck sitting at corners</string>
-                    <normal>
-                        <action id="adjustCounter">
-                            <string id="id">jumpTicks</string>
-                            <string id="value">1</string>
-                            <string id="adjust method" values="valueadjust">set</string>
-                        </action>
-                    </normal>
-                    <or>
-                        <condition id="isInArea">
-                            <string id="condition" values="yesno">yes</string>
-                            <string id="collision groups" values="collison groups" multiselect="true">INVINCIBLE_OBSTACLES;;</string>
-                            <string id="check green obstacles only" values="yesno">no</string>
-                            <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
-                            <string id="areaName"></string>
-                            <float id="xOffset">0.04</float>
-                            <float id="yOffset">0.03</float>
-                            <float id="width">0.08</float>
-                            <float id="height">0.05</float>
-                            <string id="check line of sight" values="yesno">no</string>
-                            <string id="ignore invisibility" values="yesno">yes</string>
-                        </condition>
-                        <condition id="isInArea">
-                            <string id="condition" values="yesno">yes</string>
-                            <string id="collision groups" values="collison groups" multiselect="true">INVINCIBLE_OBSTACLES;;</string>
-                            <string id="check green obstacles only" values="yesno">no</string>
-                            <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
-                            <string id="areaName"></string>
-                            <float id="xOffset">-0.04</float>
-                            <float id="yOffset">-0.30</float>
-                            <float id="width">0.08</float>
-                            <float id="height">0.05</float>
-                            <string id="check line of sight" values="yesno">no</string>
-                            <string id="ignore invisibility" values="yesno">yes</string>
-                        </condition>
-                        <condition id="isInArea">
-                            <string id="condition" values="yesno">no</string>
-                            <string id="collision groups" values="collison groups" multiselect="true">INVINCIBLE_OBSTACLES;;</string>
-                            <string id="check green obstacles only" values="yesno">yes</string>
-                            <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
-                            <string id="areaName"></string>
-                            <float id="xOffset">0.00</float>
-                            <float id="yOffset">0.00</float>
-                            <float id="width">0.16</float>
-                            <float id="height">0.05</float>
-                            <string id="check line of sight" values="yesno">no</string>
-                            <string id="ignore invisibility" values="yesno">yes</string>
-                        </condition>
-                        <condition id="checkCounter">
-                            <string id="id">jumpTicks</string>
-                            <string id="value">0</string>
-                            <string id="compare method" values="valuecompare">equal</string>
-                        </condition>
-                    </or>
-                </andblock>
                 <condition id="getBoolEquals">
                     <string id="id">MoveAwayFromTarget</string>
                     <string id="value" values="yesno">yes</string>
@@ -610,6 +556,7 @@
                                                     <string id="condition" values="yesno">yes</string>
                                                     <string id="collision groups" values="collison groups" multiselect="true">PLAYERS;;CREEPS;;INVINCIBLE_OBSTACLES;;DESTROYABLE_OBSTACLES;;</string>
                                                     <string id="check green obstacles only" values="yesno">no</string>
+                                                    <string id="count characters out of combat" values="yesno">yes</string>
                                                     <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
                                                     <string id="areaName"></string>
                                                     <float id="xOffset">0.04</float>
@@ -691,6 +638,7 @@
                                                     <string id="condition" values="yesno">yes</string>
                                                     <string id="collision groups" values="collison groups" multiselect="true">INVINCIBLE_OBSTACLES;;</string>
                                                     <string id="check green obstacles only" values="yesno">yes</string>
+                                                    <string id="count characters out of combat" values="yesno">yes</string>
                                                     <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
                                                     <string id="areaName"></string>
                                                     <float id="xOffset">0.00</float>
@@ -748,6 +696,7 @@
                                                             <string id="condition" values="yesno">yes</string>
                                                             <string id="collision groups" values="collison groups" multiselect="true">INVINCIBLE_OBSTACLES;;DESTROYABLE_OBSTACLES;;</string>
                                                             <string id="check green obstacles only" values="yesno">no</string>
+                                                            <string id="count characters out of combat" values="yesno">yes</string>
                                                             <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
                                                             <string id="areaName"></string>
                                                             <float id="xOffset">0.04</float>
@@ -762,6 +711,7 @@
                                                             <string id="condition" values="yesno">yes</string>
                                                             <string id="collision groups" values="collison groups" multiselect="true">CREEPS;;</string>
                                                             <string id="check green obstacles only" values="yesno">no</string>
+                                                            <string id="count characters out of combat" values="yesno">yes</string>
                                                             <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
                                                             <string id="areaName"></string>
                                                             <float id="xOffset">0.00</float>
@@ -1112,6 +1062,7 @@
                                                                             <string id="condition" values="yesno">yes</string>
                                                                             <string id="collision groups" values="collison groups" multiselect="true">INVINCIBLE_OBSTACLES;;DESTROYABLE_OBSTACLES;;</string>
                                                                             <string id="check green obstacles only" values="yesno">no</string>
+                                                                            <string id="count characters out of combat" values="yesno">yes</string>
                                                                             <string id="teams" values="teams" multiselect="true">OWN_TEAM;;ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
                                                                             <string id="areaName"></string>
                                                                             <float id="xOffset">0.04</float>
@@ -1143,6 +1094,7 @@
                                                                             <string id="condition" values="yesno">yes</string>
                                                                             <string id="collision groups" values="collison groups" multiselect="true">PLAYERS;;CREEPS;;</string>
                                                                             <string id="check green obstacles only" values="yesno">no</string>
+                                                                            <string id="count characters out of combat" values="yesno">yes</string>
                                                                             <string id="teams" values="teams" multiselect="true">ENEMY_TEAM;;NEUTRAL_TEAM;;</string>
                                                                             <string id="areaName"></string>
                                                                             <float id="xOffset">0.00</float>
