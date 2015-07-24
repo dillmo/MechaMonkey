@@ -1,6 +1,74 @@
 <?xml version="1.0" ?>
 <enemy>
     <behaviour>
-        <root x="110" y="40" />
+        <root x="110" y="40">
+            <normal>
+                <condition id="once">
+                    <string id="Comment">Initialize</string>
+                    <normal>
+                        <action id="log">
+                            <string id="text">INFO: Initializing MechaMonkey</string>
+                            <string id="counter"></string>
+                            <string id="bool"></string>
+                        </action>
+                        <action id="adjustCounter">
+                            <string id="id">setState</string>
+                            <string id="value">1</string>
+                            <string id="adjust method" values="valueadjust">set</string>
+                        </action>
+                    </normal>
+                </condition>
+                <condition id="checkCounter">
+                    <string id="id">setState</string>
+                    <string id="value">0</string>
+                    <string id="compare method" values="valuecompare">greater</string>
+                    <string id="Comment">Process requests to set the state</string>
+                    <normal>
+                        <condition id="checkCounter">
+                            <string id="id">setState</string>
+                            <string id="value">1</string>
+                            <string id="compare method" values="valuecompare">equal</string>
+                            <string id="Comment">MoveToHealarea</string>
+                            <normal>
+                                <action id="adjustCounter">
+                                    <string id="id">state</string>
+                                    <string id="value">1</string>
+                                    <string id="adjust method" values="valueadjust">set</string>
+                                </action>
+                                <action id="log">
+                                    <string id="text">INFO: state set to MoveToHealarea (1)</string>
+                                    <string id="counter"></string>
+                                    <string id="bool"></string>
+                                </action>
+                            </normal>
+                        </condition>
+                        <action id="adjustCounter">
+                            <string id="id">setState</string>
+                            <string id="value">0</string>
+                            <string id="adjust method" values="valueadjust">set</string>
+                            <string id="Comment">Close requests</string>
+                        </action>
+                    </normal>
+                </condition>
+                <condition id="getBoolEquals">
+                    <string id="id">false</string>
+                    <string id="value" values="yesno">no</string>
+                    <string id="Comment">Process states. States are isolated from each other to improve reliability.</string>
+                    <normal>
+                        <condition id="checkCounter">
+                            <string id="id">state</string>
+                            <string id="value">1</string>
+                            <string id="compare method" values="valuecompare">equal</string>
+                            <normal>
+                                <action id="executeBehaviourTree">
+                                    <string id="fileName">Mod_MechaMonkey_MoveToHealarea</string>
+                                    <string id="Minimized">yes</string>
+                                </action>
+                            </normal>
+                        </condition>
+                    </normal>
+                </condition>
+            </normal>
+        </root>
     </behaviour>
 </enemy>
